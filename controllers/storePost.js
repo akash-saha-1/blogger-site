@@ -18,7 +18,7 @@ module.exports = async (req, res) => {
   //     console.log(err);
   //   }
   cloudinary.v2.uploader.upload(
-    image.tempFilePath,
+    image,
     {
       folder: "node-blogging-website",
       use_filename: true,
