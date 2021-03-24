@@ -1,0 +1,39 @@
+{
+  "name": "blogger-site",
+  "version": "1.0.0",
+  "description": "this is blogging website made using node and mongodb and a sample bootstrap template",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akash-saha-1/blogger-site.git"
+  },
+  "author": "Akash Saha",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/akash-saha-1/blogger-site/issues"
+  },
+  "homepage": "https://github.com/akash-saha-1/blogger-site#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.19.0",
+    "chalk": "^4.1.0",
+    "cloudinary": "^1.25.1",
+    "connect-flash": "^0.1.1",
+    "connect-mongo": "^4.4.1",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-edge": "^2.0.2",
+    "express-fileupload": "^1.2.1",
+    "express-handlebars": "^5.2.1",
+    "express-session": "^1.17.1",
+    "mongoose": "^5.12.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}

@@ -1,0 +1,61 @@
+@layout('layouts.app')
+
+@section('content')
+  <header class="masthead" style="background-image: url('/img/contact-bg.jpg')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="page-heading">
+            <h1>New Post</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+      <div class="row">
+          <div class="col-md-8 offset-md-2">
+              <form action="/post/store" method="POST" enctype="multipart/form-data">
+                  <div class="control-group">
+                      <div class="form-group floating-label-form-group controls">
+                          <label>Title</label>
+                          <input type="text" name="title" placeholder="Title" class="form-control"/>
+                      </div>
+                  </div>
+                  <div class="control-group">
+                    <div class="form-group floating-label-form-group controls">
+                        <label>Subtitle</label>
+                        <input type="text" name="subtitle" placeholder="Subtitle" class="form-control"/>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="form-group floating-label-form-group controls">
+                        <label>Content</label>
+                        <textarea name="content" cols="30" rows="10" placeholder="Content..."
+                         class="form-control textarea" ></textarea>
+                    </div>
+                </div>
+                <div class="form-group mt-5">
+                  <input type="file" name="image" class="form-control-file" accept=".jpg,.jpeg,.png,.gif,.PNG,.JPEG,.JPG">
+                </div>
+                <div class="form-group text-center my-4">
+                    <button class="btn-primary">Create Post</button>
+                </div>
+              </form>
+          </div>
+      </div>
+  </div>
+@endsection
+
+@section('summernote-style')
+  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+@endsection
+
+@section('scripts')
+  <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+  <script type="text/javascript">
+  $('.textarea').summernote();
+  </script>
+@endsection
