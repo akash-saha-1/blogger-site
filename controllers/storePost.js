@@ -12,36 +12,37 @@ module.exports = async (req, res) => {
     //fs.unlinkSync(filePath);
   };
 
-  image.mv(uploadPath, (err) => {
-    if (err) {
-      console.log(1);
-      console.log(err);
-    }
-    cloudinary.v2.uploader.upload(image.name, (err, result) => {
-      if (err) {
-        console.log(2);
-        console.log(err);
-        deleteFile(uploadPath);
-        return res.redirect("/post/new");
-      }
+  // image.mv(uploadPath, (err) => {
+  //   if (err) {
+  //     console.log(1);
+  //     console.log(err);
+  //   }
+  //   cloudinary.v2.uploader.upload(image.name, (err, result) => {
+  //     if (err) {
+  //       console.log(2);
+  //       console.log(err);
+  //       deleteFile(uploadPath);
+  //       return res.redirect("/post/new");
+  //     }
 
-      Post.create(
-        {
-          ...req.body,
-          image: result.secure_url,
-          author: req.session.userId,
-        },
-        (err, post) => {
-          if (err) {
-            console.log(3);
-            console.log(err);
-          }
-          deleteFile(uploadPath);
-          res.redirect("/");
-        }
-      );
-    });
-  });
+  //     Post.create(
+  //       {
+  //         ...req.body,
+  //         image: result.secure_url,
+  //         author: req.session.userId,
+  //       },
+  //       (err, post) => {
+  //         if (err) {
+  //           console.log(3);
+  //           console.log(err);
+  //         }
+  //         deleteFile(uploadPath);
+  //         res.redirect("/");
+  //       }
+  //     );
+  //   });
+  // });
+
   stream = cloudinary.uploader.upload_stream(
     function (result) {
       console.log(result);
