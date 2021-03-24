@@ -8,6 +8,10 @@
     "start": "node index.js",
     "dev": "nodemon index.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akash-saha-1/blogger-site.git"
+  },
   "author": "Akash Saha",
   "license": "ISC",
   "bugs": {
