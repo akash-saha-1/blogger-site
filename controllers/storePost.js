@@ -5,47 +5,48 @@ const fs = require("fs");
 
 module.exports = async (req, res) => {
   const { image } = req.files;
+  console.log(image);
   const uploadPath = path.resolve("./../public/posts", image.name);
   console.log(uploadPath);
   const deleteFile = (filePath) => {
     //fs.unlinkSync(filePath);
   };
 
-  image.mv(uploadPath, (err) => {
-    if (err) {
-      console.log(1);
-      console.log(err);
-    }
-    cloudinary.v2.uploader.upload(
-      uploadPath,
-      {
-        folder: "node-blogging-website",
-        use_filename: true,
-      },
-      (err, result) => {
-        if (err) {
-          console.log(2);
-          console.log(err);
-          deleteFile(uploadPath);
-          return res.redirect("/post/new");
-        }
-
-        Post.create(
-          {
-            ...req.body,
-            image: result.secure_url,
-            author: req.session.userId,
-          },
-          (err, post) => {
-            if (err) {
-              console.log(3);
-              console.log(err);
-            }
-            deleteFile(uploadPath);
-            res.redirect("/");
-          }
-        );
+  // image.mv(uploadPath, (err) => {
+  //   if (err) {
+  //     console.log(1);
+  //     console.log(err);
+  //   }
+  cloudinary.v2.uploader.upload(
+    image.tempFilePath,
+    {
+      folder: "node-blogging-website",
+      use_filename: true,
+    },
+    (err, result) => {
+      if (err) {
+        console.log(2);
+        console.log(err);
+        deleteFile(uploadPath);
+        return res.redirect("/post/new");
       }
-    );
-  });
+
+      Post.create(
+        {
+          ...req.body,
+          image: result.secure_url,
+          author: req.session.userId,
+        },
+        (err, post) => {
+          if (err) {
+            console.log(3);
+            console.log(err);
+          }
+          deleteFile(uploadPath);
+          res.redirect("/");
+        }
+      );
+    }
+  );
+  //});
 };
