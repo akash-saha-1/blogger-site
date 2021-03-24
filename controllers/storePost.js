@@ -7,7 +7,7 @@ module.exports = async (req, res) => {
   const { image } = req.files;
   const uploadPath = path.resolve(__dirname, "..", "public/posts", image.name);
   const deleteFile = (filePath) => {
-    fs.unlinkSync(filePath);
+    //fs.unlinkSync(filePath);
   };
 
   image.mv(uploadPath, (err) => {
