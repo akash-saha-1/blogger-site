@@ -6,11 +6,16 @@ const fs = require("fs");
 module.exports = async (req, res) => {
   const { image } = req.files;
   const uploadPath = path.resolve(__dirname, "..", "public/posts", image.name);
+  console.log(uploadPath);
   const deleteFile = (filePath) => {
     //fs.unlinkSync(filePath);
   };
 
   image.mv(uploadPath, (err) => {
+    if (err) {
+      console.log(1);
+      console.log(err);
+    }
     cloudinary.v2.uploader.upload(
       uploadPath,
       {
@@ -19,6 +24,8 @@ module.exports = async (req, res) => {
       },
       (err, result) => {
         if (err) {
+          console.log(2);
+          console.log(err);
           deleteFile(uploadPath);
           return res.redirect("/post/new");
         }
@@ -31,6 +38,7 @@ module.exports = async (req, res) => {
           },
           (err, post) => {
             if (err) {
+              console.log(3);
               console.log(err);
             }
             deleteFile(uploadPath);
