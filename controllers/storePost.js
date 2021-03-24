@@ -5,7 +5,7 @@ const fs = require("fs");
 
 module.exports = async (req, res) => {
   const { image } = req.files;
-  const uploadPath = path.resolve(__dirname, "..", "public/posts", image.name);
+  const uploadPath = path.resolve("./../public/posts", image.name);
   console.log(uploadPath);
   const deleteFile = (filePath) => {
     //fs.unlinkSync(filePath);
