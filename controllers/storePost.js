@@ -17,9 +17,21 @@ module.exports = async (req, res) => {
   //     console.log(1);
   //     console.log(err);
   //   }
+  //this image saving in server is not possible in heroku so implemented encrypted data and uploaded it.
   let encodedData = image.data.toString("base64");
+  let uploadString = "";
+  if (image.mimetype == "image/png") {
+    uploadString = `data:image/png;base64,${encodedData}`;
+  } else if (image.mimetype == "image/jpg") {
+    uploadString = `data:image/jpg;base64,${encodedData}`;
+  } else if (image.mimetype == "image/jpeg") {
+    uploadString = `data:image/jpeg;base64,${encodedData}`;
+  } else {
+    return res.redirect("/post/new");
+  }
+
   cloudinary.v2.uploader.upload(
-    `data:image/png;base64,${encodedData}`,
+    uploadString,
     {
       folder: "node-blogging-website",
       use_filename: true,
@@ -40,6 +52,7 @@ module.exports = async (req, res) => {
         (err, post) => {
           if (err) {
             console.log(err);
+            return res.redirect("/post/new");
           }
           deleteFile(uploadPath);
           res.redirect("/");

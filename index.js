@@ -24,7 +24,7 @@ const redirectIfAuthenticated = require("./middleware/redirectIfAuthenticated");
 const app = express();
 
 mongoose.connect(
-  "mongodb+srv://akash:12345@blogging-site.towh1.mongodb.net/node-blog?retryWrites=true&w=majority",
+  process.env.MONGO_DB_URI,
   {
     useUnifiedTopology: true,
     useNewUrlParser: true,
@@ -40,16 +40,16 @@ app.use(connectFlash());
 
 app.use(
   expressSession({
-    secret: "super_secret",
+    secret: process.env.EXPRESS_SESSION_KEY,
     resave: true,
     saveUninitialized: true,
   })
 );
 
 cloudinary.config({
-  api_key: "629323566933331",
-  api_secret: "J_vytVzj4Uum6VPVjjJ_gvBnOEY",
-  cloud_name: "akash-cloudinary",
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
 });
 
 app.use(express.static("public"));
