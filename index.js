@@ -40,16 +40,16 @@ app.use(connectFlash());
 
 app.use(
   expressSession({
-    secret: process.env.EXPRESS_SESSION_KEY,
+    secret: "super_secret",
     resave: true,
     saveUninitialized: true,
   })
 );
 
 cloudinary.config({
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: "629323566933331",
+  api_secret: "J_vytVzj4Uum6VPVjjJ_gvBnOEY",
+  cloud_name: "akash-cloudinary",
 });
 
 app.use(express.static("public"));
@@ -97,7 +97,7 @@ app.use((req, res) => {
   res.render("error");
 });
 
-const port = process.env.PORT || 4000;
+const port = 4000;
 
 app.listen(port, () => {
   console.log(`App listening on port ${port}`);
