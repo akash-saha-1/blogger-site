@@ -24,7 +24,7 @@ const redirectIfAuthenticated = require("./middleware/redirectIfAuthenticated");
 const app = express();
 
 mongoose.connect(
-  process.env.MONGO_DB_URI,
+  "mongodb+srv://akash:12345@blogging-site.towh1.mongodb.net/node-blog?retryWrites=true&w=majority",
   {
     useUnifiedTopology: true,
     useNewUrlParser: true,
