@@ -43,9 +43,15 @@
           <li class="nav-item">
             <a class="nav-link" href="/">Home</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/post/new">New Post</a>
-          </li>
+          @if(!auth)
+            <li class="nav-item">
+              <a class="nav-link" href="/login">New Post</a>
+            </li>
+          @else
+            <li class="nav-item">
+              <a class="nav-link" href="/post/new">New Post</a>
+            </li>
+          @endif
           @if(!auth)
             <li class="nav-item">
               <a class="nav-link" href="/login">Login</a>
