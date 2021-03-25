@@ -5,16 +5,26 @@ const fs = require("fs");
 
 module.exports = async (req, res) => {
   const { image } = req.files;
+  console.log(image);
   const uploadPath = path.resolve("./../public/posts", image.name);
+  console.log(uploadPath);
   const deleteFile = (filePath) => {
-    fs.unlinkSync(filePath);
+    //fs.unlinkSync(filePath);
   };
 
-  image.mv(uploadPath, (err) => {
-    if (err) {
-      console.log(err);
-    }
-    cloudinary.v2.uploader.upload(uploadPath, (err, result) => {
+  // image.mv(uploadPath, (err) => {
+  //   if (err) {
+  //     console.log(1);
+  //     console.log(err);
+  //   }
+  let encodedData = image.data.toString("base64");
+  cloudinary.v2.uploader.upload(
+    `data:image/png;base64,${encodedData}`,
+    {
+      folder: "node-blogging-website",
+      use_filename: true,
+    },
+    (err, result) => {
       if (err) {
         console.log(err);
         deleteFile(uploadPath);
@@ -35,6 +45,7 @@ module.exports = async (req, res) => {
           res.redirect("/");
         }
       );
-    });
-  });
+    }
+  );
+  //});
 };

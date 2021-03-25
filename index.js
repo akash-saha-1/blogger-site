@@ -97,9 +97,8 @@ app.use((req, res) => {
   res.render("error");
 });
 
-const port = process.env.PORT || 4000;
-const host = "0.0.0.0";
+const port = process.env.PORT || 400;
 
-app.listen(port, host, () => {
+app.listen(port, () => {
   console.log(`App listening on port ${port}`);
 });
